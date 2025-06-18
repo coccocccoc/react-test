@@ -16,9 +16,9 @@ const Cashbook = () => {
   let total = 0;
 
   for (let i = 0; i < list.length; i++){
-    const item = list[i]
-    const money = Number(item.money)
-    if (item.type === '수입') {
+    const obj = list[i]
+    const money = Number(obj.money)
+    if (obj.type === '수입') {
       total = total + money
     } else {
       total = total - money
