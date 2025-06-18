@@ -8,7 +8,7 @@ const Cashbook = () => {
 
   const [money, setMoney] = useState(0)
   const [id, setId] = useState(1)
-  const [type, setType] = useState('수입')
+  const [type, setType] = useState('')
   const dispatch = useDispatch()
   const list = useSelector((state) => {
     return state.cashbook.list
