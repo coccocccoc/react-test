@@ -1,23 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import { configureStore, createSlice } from "@reduxjs/toolkit";
+import Cashbook from './Cashbook';
+import { Provider } from "react-redux";
+import "./App.css"
+
+export const cashbookSlice = createSlice({
+  name: 'cashbookSlice',
+  initialState: { list: [] },
+  reducers: {
+    'add': (state, action) => { state.list.push({ id: action.payload.id, money: action.payload.money, type: action.payload.type }) },
+    'delete': (state, action) => { state.list = state.list.filter(cashbook => cashbook.id !== action.payload.id) }
+  }
+})
 
 function App() {
+
+  const store = configureStore({
+    reducer: {
+      cashbook: cashbookSlice.reducer
+    }
+  })
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h2>가계부</h2>
+      <Provider store={store}>
+        <Cashbook></Cashbook>
+      </Provider>
     </div>
   );
 }
